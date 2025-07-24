@@ -1,0 +1,19 @@
+meta {
+  name: [GET] 특정 name의 restaurant 찾아내기
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/restaurant/find?name=생각나는 순대
+  body: text
+  auth: inherit
+}
+
+params:query {
+  name: 생각나는 순대
+}
+
+settings {
+  encodeUrl: true
+}

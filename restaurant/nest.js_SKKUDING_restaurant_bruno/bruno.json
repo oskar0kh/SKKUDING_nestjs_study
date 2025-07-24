@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "nest.js_SKKUDING_restaurant_bruno",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
