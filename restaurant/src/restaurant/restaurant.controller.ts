@@ -2,7 +2,9 @@ import { Controller, Get, HttpStatus, Res, Query, Post, Body, Delete, Param, Pat
 import { Response } from 'express'; // nestjs의 'Res'랑, express의 'Response'랑 연결해야함
 
 import { RestaurantService } from './restaurant.service'; // Service 로직 가져오기
-import { Restaurant, RestaurantList } from './interfaces/restaurant.interface'; // 인터페이스 가져오기
+import { Restaurant, RestaurantList } from './interface/restaurant.interface'; // 인터페이스 가져오기
+
+import { createRestaurantDto } from './dto/restaurant.dto';
 
 @Controller('restaurant')
 export class RestaurantController {
@@ -59,7 +61,7 @@ export class RestaurantController {
     @Post('/')
     async addRestaurant(
         @Res() res: Response,
-        @Body() newRestaurant: Restaurant
+        @Body() newRestaurant: createRestaurantDto
     ): Promise<void> {
         try {
 
@@ -115,7 +117,7 @@ export class RestaurantController {
     async patchRestaurant(
         @Res() res: Response,
         @Param('name') name: string,         // URL로 받는 restaurant의 name
-        @Body() newData: Partial<Restaurant> // HTTP Request의 body로 받는 JSON 데이터
+        @Body() newData: Partial<createRestaurantDto> // HTTP Request의 body로 받는 JSON 데이터
     ): Promise<void> {
         try {
 

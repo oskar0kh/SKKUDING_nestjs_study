@@ -1,6 +1,6 @@
 import { Injectable, Res } from '@nestjs/common';
 
-import { Restaurant, RestaurantList } from './interfaces/restaurant.interface';
+import { Restaurant, RestaurantList } from './interface/restaurant.interface';
 import { promises } from 'dns';
 
 const fs = require('fs');
