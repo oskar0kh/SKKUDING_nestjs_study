@@ -1,0 +1,28 @@
+meta {
+  name: [PATCH] name으로 정보 수정
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:3000/restaurant/일미 닭갈비
+  body: xml
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:xml {
+  {
+      "name": "일미 닭갈비",
+      "address": "경기 수원시 맞나?",
+      "phone": "8787-4545-1212",
+      "rating": 4.5
+  }
+}
+
+settings {
+  encodeUrl: true
+}

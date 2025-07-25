@@ -1,0 +1,27 @@
+meta {
+  name: [POST] 새로운 restaurant 추가
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/restaurant/
+  body: text
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:text {
+  {
+      "name": "일미 닭갈비",
+      "address": "경기 수원시 쪽문쪽 어쩌고",
+      "phone": "8787-4545-1212"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

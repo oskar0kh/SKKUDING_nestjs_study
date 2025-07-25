@@ -1,0 +1,15 @@
+meta {
+  name: [DELETE] 특정 name 데이터 삭제
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://localhost:3000/restaurant/먹거리 고을
+  body: text
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
