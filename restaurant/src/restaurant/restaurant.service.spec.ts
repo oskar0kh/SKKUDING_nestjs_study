@@ -1,6 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RestaurantService } from './restaurant.service';
+import { Res } from '@nestjs/common';
 
+const fs = require('fs');
+const path = require('path');
+
+// 전체 Service 코드가 잘 작동되는지 테스트
 describe('RestaurantService', () => {
   let service: RestaurantService;
 
@@ -14,5 +19,36 @@ describe('RestaurantService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+});
+
+// 1. getAllRestaurants() 메서드 테스트
+describe('RestaurantService - getAllRestaurants() 유닛 테스트', () => {
+  let service: RestaurantService;
+
+  // 1-1. test용 JSON 파일 경로 받기
+  const testFilePath = path.join(__dirname, 'test-data', 'restaurants.test.json');
+
+  // 1-2. RestaurantService가 기존에 사용하는 filePath 경로를 test 경로로 바꾸기
+  beforeEach(() => {
+    service = new RestaurantService(); // RestaurantService 인스턴스 생성 -> 'service'에 할당
+
+    (service as any).filePath = testFilePath; // RestaurantService가 기존에 사용하는 'filePath' = private 임
+                                              // : private을 임시 해제 -> 테스트에서도 'filePath'를 사용할 수 있게 설정!
+                                              //   -> 'filePath'의 경로를, 우리가 지금 지정한 'testFilePath'로 잠깐 변경
+                                              // ∴ RestaurantService에서 test용 JSON 파일 경로로 들어가도록 잠깐 변경
+  });
+
+  // 1-3. '실제 readFile한 결과 == getAllRestaurants 결과' 인지 확인
+  it('Test용 JSON 파일에서 모든 restaurant 데이터 가져오는지 확인 (Service)', async () => {
+
+    // 실제로 readFile을 한 결과
+    const expectedData = JSON.parse(await fs.promises.readFile(testFilePath, 'utf-8'));
+
+    // getAllRestaurants()를 사용한 결과
+    const result = await service.getAllRestaurants();
+
+    // 2개 결과가 같은지 비교
+    expect(result).toEqual(expectedData);
   });
 });
